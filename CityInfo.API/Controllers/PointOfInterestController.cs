@@ -1,4 +1,5 @@
 ﻿using CityInfo.API.Models;
+using CityInfo.API.Services;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,7 @@ namespace CityInfo.API.Controllers {
 
         private readonly ILogger<PointOfInterestController> _logger;
 
-        public PointOfInterestController(ILogger<PointOfInterestController> logger) {
+        public PointOfInterestController(ILogger<PointOfInterestController> logger,LocalMailService mailService) {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
         [HttpGet]
