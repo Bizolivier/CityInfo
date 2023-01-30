@@ -1,6 +1,21 @@
 using Microsoft.AspNetCore.StaticFiles;
+using Serilog;
+
+Log.Logger = new LoggerConfiguration()
+                                    .MinimumLevel.Debug()
+                                    .WriteTo.Console()
+                                    .WriteTo.File("logs/cityinfo.txt",rollingInterval:RollingInterval.Day)
+                                    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog();
+
+//// efface toute info de la console 
+//builder.Logging.ClearProviders();
+
+////remet tt les infos de la console 
+//builder.Logging.AddConsole();
 
 // Add services to the container.
 
@@ -10,6 +25,7 @@ builder.Services.AddControllers(options => { options.ReturnHttpNotAcceptable = t
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
+//builder.Services.AddTransient
 
 var app = builder.Build();
 
@@ -25,8 +41,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
+app.UseEndpoints(endpoints => {
     endpoints.MapControllers();
 });
 
