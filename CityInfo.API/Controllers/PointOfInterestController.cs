@@ -11,9 +11,11 @@ namespace CityInfo.API.Controllers {
         /*************** Exemple d injectin de dependance *************/
 
         private readonly ILogger<PointOfInterestController> _logger;
+        private readonly LocalMailService _mailService;
 
         public PointOfInterestController(ILogger<PointOfInterestController> logger,LocalMailService mailService) {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _mailService = mailService;
         }
         [HttpGet]
         public ActionResult<IEnumerable<PointOfInterestDto>> GetPointOfInterest(int cityId) {
