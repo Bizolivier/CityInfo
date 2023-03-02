@@ -79,8 +79,8 @@ namespace CityInfo.API.Controllers {
 
             //demo puposes - to improved
             var maxPointOfInterestId = _citiesDataStore.Cities.SelectMany(c => c.PointsOfInterest).Max(c => c.Id);
-
             var finalPointOfInterest = new PointOfInterestDto() {
+
                 Id = ++maxPointOfInterestId,
                 Name = pointOfInterest.Name,
                 Description = pointOfInterest.Description
